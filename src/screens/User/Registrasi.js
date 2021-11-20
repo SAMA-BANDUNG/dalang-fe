@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { withRouter, useHistory } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
-import { Layout, Row, Col, Typography, Card, Form, Input, DatePicker, Image, Button, message } from 'antd';
-import { LockOutlined, LoadingOutlined, UserOutlined } from '@ant-design/icons';
+import { Layout, Row, Col, Typography, Form, Input, DatePicker, Image, Button } from 'antd';
+import { LoadingOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import useWindowDimensions from '../../components/util/WindowSize'
-import Auth from "../../services/authService";
+import APIServices from "../../services";
 import plantImage from "../../assets/images/plant.png"
-import moment from 'moment';
-
+import { dialog } from "../../components/util/Alert";
 const { Content } = Layout;
 const { Text } = Typography;
 
@@ -16,23 +15,23 @@ const Registrasi = () => {
     const history = useHistory();
     const [formRegisInput] = Form.useForm();
     const [isLoading, setLoading] = useState(false);
-    const [visibleModal, setVisibleModal] = useState(false);
     const [regisStep, setRegisStep] = useState(1);
     const dateFormat = 'DD/MM/YYYY';
-
-    const handleModal = () => {
-        setVisibleModal(!visibleModal);
-    };
 
     //
     const [fieldPhoneActive, setFieldPhoneActive] = useState(false);
     const [fieldPasswordActive, setFieldPasswordActive] = useState(false);
     //
 
-    const gotoForgotPassword = () => {
-        message.info("Laman Lupa Password belum tersedia");
-        // const loc = '/lupa-password';
-        // history.push(loc);
+    // const gotoForgotPassword = () => {
+    //     message.info("Laman Lupa Password belum tersedia");
+    //     // const loc = '/lupa-password';
+    //     // history.push(loc);
+    // }
+
+    const gotoHome = () => {
+        const loc = '/';
+        history.push(loc);
     }
 
     const gotoLogin = () => {
@@ -42,69 +41,40 @@ const Registrasi = () => {
 
     const onFinish = (values) => {
         setLoading(true)
-        let loginData = {
-            var_login: values.var_login,
-            password: values.password
+        let body = {
+            full_name: values.full_name,
+            date_of_birth: values.date_of_birth,
+            address: values.address,
+            phone_number: values.phone_number,
+            email: values.email,
+            passsword: values.password
         }
-        // // Login Test
-        //     if(values.no_telepon === "1" && values.password === "1"){
-        //         localStorage.setItem('role', JSON.stringify("123"));
-        //         const loc = 'profil-staf';
-        //         history.push(loc);
-        //     } else if (values.no_telepon === "2" && values.password === "2"){
-        //         localStorage.setItem('role', JSON.stringify("234"));
-        //         const loc = 'profil-dokter';
-        //         history.push(loc);
-        //     } else if(values.no_telepon === "3" && values.password === "3"){
-        //         localStorage.setItem('role', JSON.stringify("pasien"));
-        //         const loc = 'profil-pasien';
-        //         history.push(loc);
-        //     }
-        // //
 
-        Auth.login(loginData).then((response) => {
+        APIServices.register(body)
+        .then(res => {
+            console.log(res);
             setLoading(false);
-            let res = response.data;
-            let status = JSON.parse(res.data.status);
-            let login_time = moment().unix();
-            console.log("login time: ", login_time);
-
-            if(res && status === 1){
-                localStorage.setItem('no_identitas', JSON.stringify(res.data.no_identitas));
-                localStorage.setItem('no_telepon', JSON.stringify(res.data.no_telepon));
-                localStorage.setItem('role', JSON.stringify(res.meta.role * login_time));
-                localStorage.setItem('token', JSON.stringify(res.meta.api_token));
-                localStorage.setItem('login', JSON.stringify(login_time));
-            } else if(status === 0){
-                message.info("Akun Belum Terverifikasi");
-                
-                handleModal();
-            } 
-        
-            if(Auth.isLogin()){
-                let role = JSON.parse(localStorage.getItem('role'));
-                let login_time = JSON.parse(localStorage.getItem('login'));
-                if (role/login_time === 1){
-                    history.push('/dashboard-admin');
-                } else if (role/login_time === 2){
-                    history.push('/dashboard-dokter');
-                } else if (role/login_time === 3){
-                    history.push('/dashboard-pasien');
-                } else if (role/login_time === 4){
-                    history.push('/dashboard-staf-umum');
-                } else if (role/login_time === 5){
-                    history.push('/dashboard-perawat');
-                }
+            if(res.data){
+                gotoLogin()
+                dialog({
+                    icon: "success", 
+                    title:"Registrasi Berhasil", 
+                    text:"Anda dapat login menggunakan akun yang telah terdaftar"
+                })
+                .then(()=>{
+                    console.log("Berhasil");
+                })
             }
-        }).catch(err => {
-            console.log(err)
+        })
+        .catch(err => {
             setLoading(false);
-            if(err.response){
-                message.error("Nomor Identitas atau Password yang Anda masukkan salah!");
-            } else {
-                message.error("Terjadi kesalahan, periksa koneksi Anda!");
+            console.log(err);
+            if(err){
+                dialog({icon: "error", title:"Pendaftaran Gagal", text:"Nomor Identitas atau Nomor Telepon sudah digunakan!"}).then(()=>{
+                    console.log("Gagal");
+                })
             }
-        });
+        })
     }
 
     return(
@@ -119,7 +89,7 @@ const Registrasi = () => {
                             preview={false}
                         > 
                         </Image>
-                        <Text className="text-logo green" style={{marginTop:50, marginLeft:-300, zIndex:100}}>
+                        <Text className="text-logo green" style={{marginTop:20, marginLeft:-300, zIndex:100}}>
                             <Fade left>
                                 dalang
                             </Fade>             
@@ -132,6 +102,9 @@ const Registrasi = () => {
                                 UNTUKMASADEPAN <br/>
                                 LEBIHBAIK</p>
                             </Fade>             
+                        </Text>
+                        <Text className="text-logo green" style={{marginTop:20, marginLeft:100, zIndex:100}}>
+                            <ArrowLeftOutlined style={{fontSize:30}} onClick={gotoHome}/>      
                         </Text>
                         </Row>
                     </Col>
@@ -304,7 +277,7 @@ const Registrasi = () => {
                                                     required
                                                     rules={[{
                                                         required: true,
-                                                        message: 'Harap masukkan password Anda!'
+                                                        message: 'Harap masukkan password anda!'
                                                     }]}
                                                     style={{marginBottom:30}}
                                                     >

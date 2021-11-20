@@ -1,50 +1,78 @@
-import React from 'react';
-import styles from './Footer.module.scss';
-import moment from 'moment';
-import { Link } from 'react-router-dom';
-import { Grid } from 'semantic-ui-react';
-const Footer = () => {
-    return (
-        <div className={styles.Container}>
-            <div className={styles.body}>
-                <Grid stackable>
-                    <Grid.Row>
-                        <Grid.Column computer={6} mobile={16}>
-                            <div className={styles.logo}>
-                                <h1><b>Pellerex</b></h1>
-                                <div>
-                                    <a href="mailto:info@pellerex.com" target={"_blank"} rel="noopener noreferrer">
-                                        <img src={'https://cdn.pellerex.com/public/ecosystem/web/home/pellerex-email.svg'} alt="Email link to send a message to Technology Leads." />
-                                    </a>
+import React from "react";
+import { Layout, Typography, Row, Col } from "antd";
+//import { InstagramFilled, FacebookFilled, YoutubeFilled } from '@ant-design/icons';
+import { withRouter} from "react-router-dom";
+import call from "../../assets/images/call.png"
+import mail from "../../assets/images/mail.png"
+import instagram from "../../assets/images/instagram.png"
 
-                                    <a href="https://twitter.com/pellerex" target={"_blank"} rel="noopener noreferrer">
-                                        <img src={'https://cdn.pellerex.com/public/ecosystem/web/home/pellerex-twitter.svg'} alt="Technology Leads twitter account to contact us." />
-                                    </a>
-                                </div>
-                            </div>
-                        </Grid.Column>
-                        <Grid.Column computer={5} mobile={16}>
-                            <div className={styles.links}>
-                                <div className={styles.title}>LINKS</div>
-                                <div className={styles.policies}>Use of our platform is subject to <br />our <Link to="/terms">terms</Link> and <Link to="/policies">policies.</Link></div>
-                                <a href="/contact-us">Contact Us</a>
-                            </div>
-                        </Grid.Column>
-                        <Grid.Column computer={5} mobile={16}>
-                            <div className={styles.notices}>
-                                <p className={styles.title}>NOTICES</p>
+const { Text } = Typography;
 
-                                <div className={styles.copyRight}>
-                                    Copyright © <a href="https://technologyleads.io" target="_blank" rel="noopener noreferrer">Technology Leads</a> {moment().format('YYYY')}.
-                                    <br /> All rights reserved.
-                                </div>
-                            </div>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-            </div>
-        </div>
+const FooterLayout = (props) => {
+    // const openURL = (URL) =>{
+    //     window.open(URL, "_blank");
+    // }
+
+    return(
+        <Layout className="footer">
+            <Row align="top" justify="space-between" style={{minWidth:'100%', padding:15}}>
+                <Col span={8} style={{paddingLeft:100}}>
+                    <Row justify="center">
+                        <Text className="text-footer title">
+                            Sekretariat
+                        </Text>
+                    </Row>
+                    <Row justify="center" style={{paddingLeft:90}}>
+                        <Text className="text-footer">
+                            SAMA Bandung Headquarter <br/>
+                            Jl. Griya Bandung Indah No. 39 <br/>
+                            Buahbatu, Kec. Bojongsoang, Bandung <br/>
+                            Jawa Barat 40287
+                        </Text>
+                    </Row>
+                </Col>
+                <Col span={8} >
+                    <Row justify="center">
+                        <Text className="text-footer title">
+                           Menu
+                        </Text>
+                    </Row>
+                    <Row justify="center" style={{paddingLeft:30}}>
+                        <Text className="text-footer">
+                            Beranda <br/>
+                            Tentang Kami <br/>
+                            Kontak <br/>
+                            Daftar <br/>
+                            Login <br/>
+                        </Text>
+                    </Row>
+                </Col>
+                <Col span={8} style={{paddingRight: 100}}>
+                    <Row justify="center">
+                        <Text className="text-footer title">
+                            Kontak
+                        </Text>
+                    </Row>
+                    <Row justify="center" style={{paddingLeft:50}}>
+                        <Text className="text-footer">
+                            <img src={mail} alt="mail" style={{marginRight:10}}></img> contact@samabdg.id<br/>
+                            <img src={instagram} alt="ig" style={{marginRight:10}}></img>@samabandung<br/>
+                            <img src={call} alt="call" style={{marginRight:10}}></img> +62-81234567891 
+                        </Text>
+                    </Row>
+                </Col>
+            </Row>
+            <Row align='middle' justify="center" style={{minHeight:'100%'}}>
+                <Col>
+                    <Row justify="center">
+                        <Text className="text-footer">
+                            © 2021 | Sama Bandung.
+                        </Text>
+                    </Row>
+                </Col>
+            </Row>
+        </Layout>
     );
 }
 
-export default Footer;
+export default withRouter(FooterLayout)

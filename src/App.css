@@ -16,6 +16,10 @@
   src: local('Inter'), url(./assets/fonts/Montserrat/Montserrat-SemiBold.ttf) format('truetype');
 }
 
+.ant-menu-horizontal {
+  border-bottom: 0px;
+}
+
 .text-banner {
   font-family: Inter, Arial, serif;
   font-size: 5em;
@@ -26,7 +30,7 @@
   font-family: Monserat, Arial, serif;
   font-size: 2.5em;
   color: #FFF;
-  letter-spacing: -50%;
+  letter-spacing: -2px;
 }
 
 .text-logo.green {
@@ -49,8 +53,24 @@
 
 .text-navmenu {
   font-family: Inter, Arial, serif;
-  font-size: 12px;
+  font-size: 16px;
   color: #FFF;
+}
+
+.text-navmenu.green {
+  color: #008753!important;
+  background-color: transparent!important;
+}
+
+.text-footer {
+  font-family: Monserat, Arial, serif;
+  font-size: 1em;
+  color: #000;
+  letter-spacing: 0px;
+}
+
+.text-footer.title {
+  font-size: 2em;
 }
 
 .text-aboutus {
@@ -164,7 +184,13 @@
 /* Buttons */
 .app-btn {
   transition: .3s;
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+.app-btn.padding {
+  padding-left: 15px;
+  padding-bottom: 35px;
+  padding-right: 15px;
 }
 
 .app-btn.primary:not([disabled]), .app-btn.secondary:not([disabled]):hover{
@@ -173,10 +199,13 @@
     color: #000;
     font-size: 1.25em;
     font-weight: bold;
-    
 }
 
-.app-btn.primary:not([disabled]):hover, .app-btn.secondary:not([disabled]){
+.app-btn.primary:not([disabled]):hover{
+  background-color: #F0F0F0;
+}
+
+.app-btn.secondary:not([disabled]){
     color: #008753;
     background-color: #FFF;
     border-color: #FFF;
