@@ -1,0 +1,23 @@
+
+@import './variables.scss';
+
+.Container {
+    //Having Footer Stay Where It Belongs (below 1 line)
+    padding-bottom: $siteFooterHeight;
+
+    .content {
+        background-color: $white;
+    }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .Container {
+        padding-bottom: $siteMobileFooterHeight;
+    }
+}
+
+@media only screen and (min-device-width : 480px) and (max-device-width : 1080) {
+    .Container {
+        padding-bottom: $siteMobileFooterHeight;
+    }
+}
