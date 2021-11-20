@@ -11,6 +11,7 @@ import desktopBanner from '../../assets/images/desktop-banner.jpg'
 import aboutus from '../../assets/images/aboutus.png'
 import useWindowDimensions from '../../components/util/WindowSize'
 import Header from "../../components/layout/Header"
+import Footer from "../../components/layout/Footer"
 // import moment from 'moment';
 
 const { Content } = Layout;
@@ -70,11 +71,11 @@ const HomePage = () => {
                             </Fade>             
                         </Text>
                 </Row>
-                <Row id="aboutus" style={{minHeight:500, marginTop: 100, marginBottom: 40}}>
+                <Row id="aboutus" style={{minHeight:500, paddingTop:100, marginBottom: 40}}>
                     <Col xl={9} lg={9} sm={24} xs={24} style={{paddingLeft:100}}>
                         <Image 
                             src={aboutus} 
-                            style={{width:"100%", height:(width<600 && "100%"), marginTop:(width>600 ? 0 : 40)}} 
+                            style={{width:"100%", marginTop:(width>600 ? 0 : 40)}} 
                             preview={false}
                         > 
                         </Image>
@@ -165,6 +166,7 @@ const HomePage = () => {
                 </Row>
             </Content>
         </Layout>
+        <Footer/>
         </>
     );
 }

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Layout, Typography, Row, Col, Button, Menu} from "antd";
 import { UserOutlined, MenuOutlined } from '@ant-design/icons';
-import { withRouter, NavLink, useHistory } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import Auth from "../../services/authService"
 // import NavbarMenu from '../views/drawer/menu';
 
@@ -30,7 +30,7 @@ const HeaderLayout = (props) => {
         <Layout align="middle" className={(props.scrollPosition>700) ? "navmenu" : "navmenu top"}>
             <Row justify="center" align='middle' style={{height:'100%'}}>
                 {/* <Col xs={12} sm={6} md={6} lg={6} xl={10} xxl={12} style={{paddingLeft:10}}> */}
-                <Col span={6} style={{paddingLeft:10}}>
+                <Col style={{paddingLeft:10, paddingRight:200}}>
                     <Row align='middle'>
                         <Col style={{paddingLeft:5}}>
                             <Text className="text-logo">
@@ -40,37 +40,51 @@ const HeaderLayout = (props) => {
                     </Row>
                 </Col>
                 {/* <Col xs={2} sm={14} md={16} lg={18} xl={14} xxl={12}> */}
-                <Col span={14}>
-                <Menu mode="horizontal" style={{minWidth: "100%", backgroundColor:"transparent"}}>
+                <Col style={{minWidth: 700}}>
+                <Menu mode="horizontal" style={{minWidth: "100%", backgroundColor:"transparent", marginTop:5}}>
                     <Menu.Item key="1">
-                        <NavLink to="/#beranda" >
-                            <Text className="text-navmenu">
+                            <Text className="text-navmenu"
+                                onClick={()=> {
+                                    var elmnt = document.getElementById("beranda");
+                                    elmnt.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+                                }}
+                            >
                                 BERANDA
                             </Text>
-                        </NavLink>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <NavLink to="/#aboutus" >
-                            <Text className="text-navmenu">
+                            <Text className="text-navmenu" 
+                                onClick={()=> {
+                                    var elmnt = document.getElementById("aboutus");
+                                    elmnt.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+                                }}
+                            >
                                 TENTANG KAMI
                             </Text>
-                        </NavLink>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <NavLink to="/bantuan" >
-                            <Text className="text-navmenu">
+                        {/* <NavLink to="/#kontak" > */}
+                            <Text className="text-navmenu"
+                                onClick={()=> {
+                                    window.scrollTo({
+                                        top: document.body.scrollHeight,
+                                        left: 0,
+                                        behavior: 'smooth'
+                                    })
+                                }}
+                            >
                                 KONTAK
                             </Text>
-                        </NavLink>
+                        {/* </NavLink> */}
                     </Menu.Item>
-                    <Menu.Item key="6">
+                    <Menu.Item key="6" >
                         {Auth.isLogin() ? 
                             <Button type='primary' className="app-btn primary" onClick={gotoDashboard}>
                                 <UserOutlined style={{fontSize:20}}/> DASHBOARD
                             </Button>
                             :
-                            <Button type='primary' className="app-btn primary" onClick={gotoLogin}>
-                                <Text className="text-navmenu">
+                            <Button type='primary' className="app-btn primary padding" onClick={gotoLogin}>
+                                <Text className="text-navmenu green" style={{marginTop:5}}>
                                     MULAI SEKARANG
                                 </Text>
                             </Button>
