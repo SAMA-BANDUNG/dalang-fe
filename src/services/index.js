@@ -25,10 +25,42 @@ const APIServices = {
         return client.request(
             {
                 method: "post",
-                url: `${CONFIG_INITIAL_STATE.BASE_URL}/api/akun/postAkun`,
+                url: `${CONFIG_INITIAL_STATE.BASE_URL}/api/v1/register`,
                 data: data
             },
             { crossdomain: true }
+        )
+    },
+
+    //Vendor
+    getListVendor(){
+        return client.request(
+            {
+                method: "get",
+                url: `${CONFIG_INITIAL_STATE.BASE_URL}/api/v1/vendor/list`,
+            },
+            {crossdomain: true }
+        )
+    },
+
+    getVendorById(id){
+        return client.request(
+            {
+                method: "get",
+                url: `${CONFIG_INITIAL_STATE.BASE_URL}/api/v1/vendor/${id}`,
+            },
+            {crossdomain: true }
+        )
+    },
+
+    //Category
+    getListCategory(){
+        return client.request(
+            {
+                method: "get",
+                url: `${CONFIG_INITIAL_STATE.BASE_URL}/api/v1/category/list`,
+            },
+            {crossdomain: true }
         )
     },
 }

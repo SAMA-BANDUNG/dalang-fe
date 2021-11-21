@@ -20,6 +20,10 @@
   border-bottom: 0px;
 }
 
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  color: #008753;
+}
+
 .text-banner {
   font-family: Inter, Arial, serif;
   font-size: 5em;
@@ -27,7 +31,7 @@
 }
 
 .text-banner.mobile {
-  font-size: 2em;
+  font-size: 1.7em;
 }
 
 .text-logo {

@@ -46,8 +46,11 @@ const Registrasi = () => {
             date_of_birth: values.date_of_birth,
             address: values.address,
             phone_number: values.phone_number,
+            phone_type: null,
             email: values.email,
-            passsword: values.password
+            password: values.password,
+            langitude: "-6.909781",
+            longitude: "107.6172202"
         }
 
         APIServices.register(body)
@@ -58,7 +61,7 @@ const Registrasi = () => {
                 gotoLogin()
                 dialog({
                     icon: "success", 
-                    title:"Registrasi Berhasil", 
+                    title:"Pendaftaran Berhasil", 
                     text:"Anda dapat login menggunakan akun yang telah terdaftar"
                 })
                 .then(()=>{
@@ -70,7 +73,7 @@ const Registrasi = () => {
             setLoading(false);
             console.log(err);
             if(err){
-                dialog({icon: "error", title:"Pendaftaran Gagal", text:"Nomor Identitas atau Nomor Telepon sudah digunakan!"}).then(()=>{
+                dialog({icon: "error", title:"Pendaftaran Gagal", text:"Terjadi Kesalahan!"}).then(()=>{
                     console.log("Gagal");
                 })
             }
@@ -135,8 +138,7 @@ const Registrasi = () => {
                             </Col>
                             <Col offset={4} span={20}>
                                     <Form form={formRegisInput} onFinish={onFinish}>
-                                        {(regisStep===1) ?
-                                            <>
+                                        <div style={{display: (regisStep===2) && "none"}}>
                                             <Col span={24}>
                                                 <Text>
                                                     Nama Lengkap
@@ -213,9 +215,8 @@ const Registrasi = () => {
                                                     Lanjut
                                                 </Button>
                                             </Col>
-                                            </>
-                                        :
-                                            <>
+                                        </div>
+                                        <div style={{display: (regisStep===1) && "none"}}>
                                             <Col span={24}>
                                                 <Text>
                                                     Nomor Telepon
@@ -313,8 +314,7 @@ const Registrasi = () => {
                                                 </Button>
                                                 </Row>
                                             </Col>
-                                            </>  
-                                        }
+                                        </div> 
                                     </Form>
                             </Col>
                         </Row>

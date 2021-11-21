@@ -18,7 +18,7 @@ const FooterLayout = (props) => {
     return(
         <Layout className="footer">
             <Row align="top" justify="space-between" style={{minWidth:'100%', padding:15}}>
-                <Col span={8} xs={24} sm={24} style={{paddingLeft:(width>600) && 100}}>
+                <Col span={8} xl={8} lg={8} xs={24} sm={24} style={{paddingLeft:(width>600) && 100}}>
                     <Row justify="center">
                         <Text className="text-footer title">
                             Sekretariat
@@ -33,7 +33,7 @@ const FooterLayout = (props) => {
                         </Text>
                     </Row>
                 </Col>
-                <Col span={8} xs={24} sm={24}>
+                <Col span={8} xl={8} lg={8} xs={24} sm={24}>
                     <Row justify="center">
                         <Text className="text-footer title">
                            Menu
@@ -49,7 +49,7 @@ const FooterLayout = (props) => {
                         </Text>
                     </Row>
                 </Col>
-                <Col span={8} xs={24} sm={24} style={{paddingRight:(width>600) && 100}}>
+                <Col span={8} xl={8} lg={8} xs={24} sm={24} style={{paddingRight:(width>600) && 100}}>
                     <Row justify="center">
                         <Text className="text-footer title">
                             Kontak
