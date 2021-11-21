@@ -26,6 +26,10 @@
   color: #FFF;
 }
 
+.text-banner.mobile {
+  font-size: 2em;
+}
+
 .text-logo {
   font-family: Monserat, Arial, serif;
   font-size: 2.5em;
@@ -51,7 +55,7 @@
   letter-spacing: -80%;
 }
 
-.text-navmenu {
+.text-navmenu, .text-navmenu-mobile {
   font-family: Inter, Arial, serif;
   font-size: 16px;
   color: #FFF;
@@ -79,6 +83,10 @@
   color: #008753;
 }
 
+.text-aboutus.mobile {
+  font-size: 1.5em;
+}
+
 .text-auth {
   font-family: Inter, Arial, serif;
   font-size: 1.2em;
@@ -99,7 +107,7 @@
 
 /* Layout */
 .navmenu{
-  min-width: 100%;
+  min-width: 100vw;
   height: 85px;
   background-color: #008753;
   /* background-color: #FF6700!important; */
@@ -156,14 +164,14 @@
 /* End of Layout */
 
 @media screen and (min-width: 990px) {
-  .title-navicon-mobile, .title-navmenu-mobile, .title-home-mobile{
+  .text-navmenu-mobile{
     display: none;
   }
 
 }
 
 @media screen and (max-width: 990px) {
-  .title-navmenu, .title-home, .login-button{
+  .text-navmenu{
     display: none;
   }
 

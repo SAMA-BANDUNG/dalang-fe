@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import { Layout, Typography, Row, Col, Button, Menu} from "antd";
 import { UserOutlined, MenuOutlined } from '@ant-design/icons';
 import { withRouter, useHistory } from "react-router-dom";
+import useWindowDimensions from '../../components/util/WindowSize'
 import Auth from "../../services/authService"
-// import NavbarMenu from '../views/drawer/menu';
+import NavbarMenu from '../drawer/menu';
 
 const { Text } = Typography;
 
 const HeaderLayout = (props) => {
+    const { width } = useWindowDimensions();
     const history = useHistory();
     const [visibleMenu, setVisibleMenu] = useState(false);
 
@@ -21,7 +23,7 @@ const HeaderLayout = (props) => {
         history.push(loc);
     }
 
-    const gotoLogin= () => {
+    const gotoRegistrasi= () => {
         const loc = '/registrasi';
         history.push(loc);
     }
@@ -40,7 +42,7 @@ const HeaderLayout = (props) => {
                     </Row>
                 </Col>
                 {/* <Col xs={2} sm={14} md={16} lg={18} xl={14} xxl={12}> */}
-                <Col style={{minWidth: 700}}>
+                <Col style={{minWidth: (width>600) && 700, display:(width<600) && "none"}}>
                 <Menu mode="horizontal" style={{minWidth: "100%", backgroundColor:"transparent", marginTop:5}}>
                     <Menu.Item key="1">
                             <Text className="text-navmenu"
@@ -83,7 +85,7 @@ const HeaderLayout = (props) => {
                                 <UserOutlined style={{fontSize:20}}/> DASHBOARD
                             </Button>
                             :
-                            <Button type='primary' className="app-btn primary padding" onClick={gotoLogin}>
+                            <Button type='primary' className="app-btn primary padding" onClick={gotoRegistrasi}>
                                 <Text className="text-navmenu green" style={{marginTop:5}}>
                                     MULAI SEKARANG
                                 </Text>
@@ -94,20 +96,20 @@ const HeaderLayout = (props) => {
                     </Menu>
                 </Col>
                 
-                <Col span={2} className="title-navmenu-mobile">
-                    <Button className="title-navmenu-mobile" type="text" onClick={handleDrawerMenu} >
+                <Col className="text-navmenu-mobile">
+                    <Button className="text-navmenu-mobile" type="text" onClick={handleDrawerMenu} >
                         <Text>
-                            <MenuOutlined className="title-navmenu-mobile" style={{fontSize:30, color: "#FFF"}}/>
+                            <MenuOutlined className="text-navmenu-mobile" style={{fontSize:30, color: "#FFF"}}/>
                         </Text>
                     </Button>
                 </Col>
             </Row>
-            {/* <NavbarMenu
+            <NavbarMenu
                 buttonCancel={handleDrawerMenu}
                 visible={visibleMenu}
                 handleDashboard={() => {handleDrawerMenu(); gotoDashboard()}}
-                handleLogin={() => {handleDrawerMenu(); gotoLogin()}}
-            /> */}
+                handleRegistrasi={() => {handleDrawerMenu(); gotoRegistrasi()}}
+            />
         </Layout>
     );
 }
