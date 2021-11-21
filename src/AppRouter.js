@@ -1,9 +1,12 @@
 import React, { lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import ScrollToTop from './components/util/ScrollToTop';
 
 import HomePage from "./screens/Home/HomePage";
 import Login from "./screens/User/Login";
 import Registrasi from "./screens/User/Registrasi";
+import BankSampah from "./screens/Content/BankSampah";
+import DetailBankSampah from "./screens/Content/DetailBankSampah";
 
 //Products
 // const Vendor = lazy(() => import("./screens/Products/Vendor"));
@@ -33,6 +36,7 @@ const NotFound = lazy(() => import("./screens/Others/NotFound"));
 const AppRouter = () => {
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <Switch>
                 <Route exact path="/" >
                     <HomePage />
@@ -41,6 +45,8 @@ const AppRouter = () => {
                 {/*User*/}
                 <Route path="/login" component={Login} />
                 <Route path="/registrasi" component={Registrasi} />
+                <Route path="/bank-sampah" component={BankSampah} />
+                <Route path="/bank-sampah/:id" component={DetailBankSampah} />
                 <Route component={NotFound} />
             </Switch>
         </BrowserRouter>

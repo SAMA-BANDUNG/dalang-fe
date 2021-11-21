@@ -54,26 +54,26 @@ const HomePage = () => {
 
     return(
         <>
-        <Header scrollPosition={scrollPosition}/> 
+        <Header scrollPosition={scrollPosition} home={true}/> 
         <Layout>
             <Content className="layout-home">
                 <Row id="beranda" style={{minHeight:500}}>
                     <Image 
                         src={width>550 ? desktopBanner : mobileBanner} 
-                        style={{width:"100vw", height:(width<600 && "100%")}} 
+                        style={{minWidth:"100vw"}} 
                         preview={false}
                     > 
                     </Image>
                     
                     <Text className={(width>600) ? "text-banner": "text-banner mobile"} 
-                        style={{marginTop:(width>600) ? -530 : -340 , marginLeft:"auto", marginRight:"auto", zIndex:10}}>
+                        style={{marginTop:(width>600) ? -540 : -340 , marginLeft:"auto", marginRight:"auto", zIndex:10}}>
                         <Fade >
                         {bannerText}
                         </Fade>             
                     </Text>
                 </Row>
                 <Row id="aboutus" style={{minHeight:500, paddingTop:(width>600) && 100, marginBottom: 40}}>
-                    <Col xl={9} lg={9} sm={24} xs={24} style={{paddingLeft:(width>600) ? 100 : 25}}>
+                    <Col xl={9} lg={9} sm={24} xs={24} style={{paddingLeft:(width>600) && 100}}>
                         <Image 
                             src={aboutus} 
                             style={{width:"100%", marginTop:(width>600 ? 0 : 40)}} 
@@ -149,11 +149,11 @@ const HomePage = () => {
                                 >
                                     <Text style={{color: "#000"}}>
                                         <Fade right>
-                                            1. Cek Bank Sampah terdekat <a href="/" target="_blank">disini</a> <br/>
+                                            <p>1. Cek Bank Sampah terdekat <a href="/bank-sampah" target="_blank">disini</a> <br/>
                                             2. Pilih lokasi Bank Sampah untuk menyetorkan sampah daur ulang Anda <br/>
                                             3. Isi formulir request setor sampah <br/>
                                             4. Tunggu pengelola Bank Sampah mengonfirmasi request setor sampah <br/>
-                                            5. Setorkan sampah kepada pengelola Bank Sampah
+                                            5. Setorkan sampah kepada pengelola Bank Sampah</p>
                                         </Fade>             
                                     </Text>
                                 </Panel>

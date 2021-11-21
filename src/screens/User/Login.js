@@ -55,18 +55,21 @@ const Login = () => {
             localStorage.setItem('token', JSON.stringify(res.data.token));
             localStorage.setItem('user_type', JSON.stringify(res.data.user_type));
         
-            if(Auth.isLogin()){
-                let role = JSON.parse(localStorage.getItem('role'));
-                let login_time = JSON.parse(localStorage.getItem('login'));
-                if (role/login_time === 1){
-                    history.push('/dashboard');
-                } 
-            }
+            // if(Auth.isLogin()){
+            //     let role = JSON.parse(localStorage.getItem('role'));
+            //     let login_time = JSON.parse(localStorage.getItem('login'));
+            //     if (role/login_time === 1){
+            //         history.push('/');
+            //     } 
+            // }
+            
+            message.success("Login berhasil!");
+            history.push('/');
         }).catch(err => {
             console.log(err)
             setLoading(false);
             if(err.response){
-                message.error("Nomor Identitas atau Password yang Anda masukkan salah!");
+                message.error("Email atau Password yang Anda masukkan salah!");
             } else {
                 message.error("Terjadi kesalahan, periksa koneksi Anda!");
             }

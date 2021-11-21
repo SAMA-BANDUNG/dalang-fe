@@ -1,11 +1,12 @@
  import axios from 'axios';
+ import CONFIG from './config';
 // import { APIServices } from "./index"
 
 export default class Auth {
 
   static login(body) {
     return new Promise((resolve, reject) => {
-      axios.post(process.env.REACT_APP_API_BASE_URL  + '/api/v1/login', body).then((res) => {
+      axios.post(CONFIG.BASE_URL + '/api/v1/login', body).then((res) => {
         setTimeout(_ => {
           resolve(res);
         }, 1000);
